@@ -22,6 +22,10 @@ const PrimeSchema = new mongoose.Schema({
     numPrimes: { // Define a field for the number of primes found
         type: Number, // The type of the field is Number
         required: true // It is required to have a value for this field
+    },
+    primes: {
+        type: [Number], // Array field to store prime numbers
+        default: []     // Default value is an empty array
     }
 });
 
