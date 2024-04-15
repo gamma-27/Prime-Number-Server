@@ -29,8 +29,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.post('/api/data', async (req, res) => {
   try {
       const { start, end, algorithm } = req.body; // Extract start, end, and algorithm from request body
-      console.log("start =", start); // Log start value
-      console.log("end =", end); // Log end value
+   
       
       // Calculate prime numbers using isPrime function
       const primes = await isPrime(start, end);
