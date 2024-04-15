@@ -1,27 +1,34 @@
-// primeUtils.js
-function isPrime(start, end) {
-    let primes = [];
+function isPrime(end) {
+    // Create an array to mark whether numbers are prime or not
+    let sieve = [];
+    for (let i = 0; i <= end; i++) {
+        sieve.push(true); // Assume all numbers are prime initially
+    }
+    
+    // Mark 0 and 1 as not prime
+    sieve[0] = false;
+    sieve[1] = false;
 
-    // Function to check if a number is prime
-    function checkPrime(num) {
-        if (num <= 1) return false;
-        if (num === 2) return true;
-        if (num % 2 === 0) return false;
-        for (let i = 3; i <= Math.sqrt(num); i += 2) {
-            if (num % i === 0) return false;
+    // Iterate through the numbers starting from 2
+    for (let i = 2; i <= Math.sqrt(end); i++) {
+        if (sieve[i]) { // If i is prime
+            // Mark all multiples of i as not prime
+            for (let j = i * i; j <= end; j += i) {
+                sieve[j] = false;
+            }
         }
-        return true;
     }
 
-    // Find primes within the range
-    for (let i = start; i <= end; i++) {
-        if (checkPrime(i)) {
+    // Collect primes from the sieve
+    let primes = [];
+    for (let i = 2; i <= end; i++) {
+        if (sieve[i]) {
             primes.push(i);
         }
     }
-    console.log("Prime is ", primes);
+
     return primes;
-    
 }
 
+// Export the function
 module.exports = { isPrime };
